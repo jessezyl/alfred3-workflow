@@ -15,6 +15,7 @@ def get_page(url):
 
 
 def get_nowplaying():
+    """获取正在热映电影信息"""
     movie_url = 'https://movie.douban.com/nowplaying/shenzhen/'
     movie_item = {}
     movie_list = []
@@ -39,6 +40,7 @@ def get_nowplaying():
 
 
 def get_later():
+    """获取即将上映电影信息"""
     movie_url = 'https://movie.douban.com/later/shenzhen/'
     movie_item = {}
     movie_list = []
@@ -58,6 +60,7 @@ def get_later():
 
 
 def arg_switch(arg):
+    """根据输入参数获取不同电影信息"""
     return {
         'now': get_nowplaying,
         'soon': get_later
@@ -69,9 +72,7 @@ def main(wf):
         arg = 'soon'
     else:
         arg = wf.args[0]
-
     wf_items = arg_switch(arg)()
-
     for item in wf_items:
         wf.add_item(title=item['title'], subtitle=item['subtitle'], arg=item['arg'], valid=True)
     wf.send_feedback()

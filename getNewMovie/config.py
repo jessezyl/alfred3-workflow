@@ -3,7 +3,8 @@
 # config.py created by Jesse
 # 16/8/8 15:05
 
-import urllib2, re
+import urllib2
+import re
 from bs4 import BeautifulSoup
 
 

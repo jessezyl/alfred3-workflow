@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.alfred3.createFiles</string>
+	<key>category</key>
+	<string>Tools</string>
+	<key>connections</key>
+	<dict>
+		<key>8382D1DA-C0C9-4EB1-A233-5608E31CCD45</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FC1824CA-FA19-45DB-8671-B5A8B60472D6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>FC1824CA-FA19-45DB-8671-B5A8B60472D6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6BBB5485-A77A-4A23-89A3-2B2A0FEA81DD</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Jesse zyl</string>
+	<key>description</key>
+	<string>create files</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Create Files</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>keyword</key>
+				<string>cf</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>稍等...</string>
+				<key>script</key>
+				<string>#!/usr/bin/env python
+# encoding: utf-8
+# main.py created by Jesse
+# 16/9/19 10:55
+
+import sys, config
+from workflow import Workflow
+
+if __name__ == u'__main__':
+    wf = Workflow()
+    sys.exit(wf.run(config.main))
+
+</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>快速新建文件，保存在‘文稿’文件夹</string>
+				<key>title</key>
+				<string>新建文件</string>
+				<key>type</key>
+				<integer>3</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>8382D1DA-C0C9-4EB1-A233-5608E31CCD45</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string># encoding: utf-8
+
+import sys,os
+import subprocess
+
+query = sys.argv[1]
+
+path = r'/Users/jesse/Documents'
+abs_path = os.path.join(path, query)
+notification = ''
+if not os.path.exists(abs_path):
+    open(abs_path, 'w').close()
+    notification = '已创建 ' + query
+else:
+    notification = query + ' 已存在,直接打开'
+subprocess.call(['open', abs_path])
+sys.stdout.write(notification)</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>3</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>FC1824CA-FA19-45DB-8671-B5A8B60472D6</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>文件保存在“文稿”文件夹</string>
+				<key>title</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>6BBB5485-A77A-4A23-89A3-2B2A0FEA81DD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Alfred's Script Filter object is extremely powerful, and gives you control over the results displayed in Alfred.
+
+Alfred 3 now supports JSON, which is the recommended format. XML is also supported for legacy Alfred 2 workflows, and has been updated to include the new features.
+
+A new option now exists for Script Filters, "Alfred filters results". This allows you to return a whole list of results, let Alfred do the subsequent filtering with extreme performance. When this option is selected, your script will be called once with no argument.</string>
+	<key>uidata</key>
+	<dict>
+		<key>6BBB5485-A77A-4A23-89A3-2B2A0FEA81DD</key>
+		<dict>
+			<key>xpos</key>
+			<integer>610</integer>
+			<key>ypos</key>
+			<integer>100</integer>
+		</dict>
+		<key>8382D1DA-C0C9-4EB1-A233-5608E31CCD45</key>
+		<dict>
+			<key>xpos</key>
+			<integer>160</integer>
+			<key>ypos</key>
+			<integer>100</integer>
+		</dict>
+		<key>FC1824CA-FA19-45DB-8671-B5A8B60472D6</key>
+		<dict>
+			<key>xpos</key>
+			<integer>370</integer>
+			<key>ypos</key>
+			<integer>100</integer>
+		</dict>
+	</dict>
+	<key>version</key>
+	<string>1.0</string>
+	<key>webaddress</key>
+	<string>github.com/jessezyl</string>
+</dict>
+</plist>
